@@ -33,7 +33,7 @@ const Hero = () => {
           <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
             <div
               onClick={handleMiniVidClick}
-              className="origin-center scale-50 opacity-100 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
+              className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
             >
               <video
                 ref={nextVidRef}
