@@ -1,25 +1,29 @@
 import { useState, useRef } from "react";
-import { preview } from "vite";
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [loadedVideos, setLoadedVideos] = useState(0);
 
   const totalVideos = 4;
   const nextVidRef = useRef(null);
 
-  const handleMiniVideoLoad = () => {
+  const handleVideoLoad = () => {
     setLoadedVideos((prev) => prev + 1);
   };
 
   const handleMiniVidClick = () => {
     setHasClicked(true);
 
-    setCurrentIndex((prevIndex) => prevIndex + 1);
+    setCurrentIndex((prevIndex) => (prevIndex % totalVideos) + 1);
   };
+
+  const getCurIndex = currentIndex === totalVideos - 1 ? 1 : currentIndex;
+
+  const upcomingVideoIndex =
+    currentIndex === totalVideos ? 1 : currentIndex + 1;
 
   const getVideoSrc = (index) => `videos/hero-${index}.mp4`;
 
@@ -37,15 +41,33 @@ const Hero = () => {
             >
               <video
                 ref={nextVidRef}
-                src={getVideoSrc(currentIndex + 1)}
+                src={getVideoSrc(upcomingVideoIndex)}
                 loop
                 muted
                 id="current-video"
                 className="size-64 origin-center scale-150 object-cover object-center"
-                onLoadedData={handleMiniVideoLoad}
+                onLoadedData={handleVideoLoad}
               />
             </div>
           </div>
+          <video
+            ref={nextVidRef}
+            src={getVideoSrc(currentIndex)}
+            loop
+            muted
+            id="next-video"
+            className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
+            onLoadedData={handleVideoLoad}
+          />
+          <video
+            src={getVideoSrc(getCurIndex)}
+            autoPlay
+            loop
+            muted
+            className="absolute left-0 top-0 size-full object-cover object-center"
+            onLoadedData={handleVideoLoad}
+          />
+          i
         </div>
       </div>
     </div>
