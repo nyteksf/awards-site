@@ -147,7 +147,8 @@ body {
   @apply h-1 w-px rounded-full bg-white transition-all duration-200 ease-in-out;
 }
 
-.indicator-line.active {
+.indicator-line.active,
+.indicator-line.pulsing {
   animation: indicator-line 0.5s ease infinite;
   animation-delay: calc(var(--animation-order) * 0.1s);
 }
